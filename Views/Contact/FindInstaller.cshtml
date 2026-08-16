@@ -1,0 +1,38 @@
+@{
+    ViewData["Title"] = "Find an Installer";
+    var installers = ViewBag.Installers as List<OxygenSolutions.Models.Installer> ?? new();
+    var byState = installers.GroupBy(i => i.State).OrderBy(g => g.Key).ToList();
+}
+
+<div class="os-page-header">
+    <div class="os-section-eyebrow">04 &mdash; Get in touch</div>
+    <h1 class="font-serif">Find Certified Installers</h1>
+    <p class="os-page-subhead">Factory-trained and certified in your market. Every installer is qualified to handle rough-in, commissioning and annual service.</p>
+</div>
+
+<div class="os-installer-grid">
+    @foreach (var group in byState)
+    {
+        <div class="os-installer-state-group">
+            <div class="os-installer-state-label font-mono">@group.Key</div>
+            @foreach (var installer in group)
+            {
+                <div class="os-installer-card">
+                    <h3 class="font-serif os-installer-name">@installer.CompanyName</h3>
+                    <div class="os-installer-contacts">
+                        <a href="mailto:@installer.Email" class="os-installer-email">@installer.Email</a>
+                        <a href="tel:@installer.Phone.Replace(" ", "").Replace("(", "").Replace(")", "").Replace("-", "")" class="os-installer-phone">@installer.Phone</a>
+                        @if (!string.IsNullOrEmpty(installer.Website))
+                        {
+                            <a href="https://@installer.Website" target="_blank" rel="noopener noreferrer" class="os-installer-web">@installer.Website</a>
+                        }
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</div>
+
+<div class="os-installer-cta">
+    <p>Don&rsquo;t see your state? We&rsquo;re expanding. <a asp-controller="Contact" asp-action="Index">Contact us directly</a> and we&rsquo;ll connect you with the nearest qualified installer.</p>
+</div>

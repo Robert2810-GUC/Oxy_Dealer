@@ -1,0 +1,227 @@
+@{
+    ViewData["Title"] = "Home";
+    var featured = ViewBag.Featured as List<OxygenSolutions.Models.Product> ?? new();
+}
+
+<!-- ===== HERO ===== -->
+<section class="os-hero">
+    <div class="os-hero-text">
+        <div class="os-eyebrow">Ambient oxygen &middot; CO MT WY ID UT</div>
+        <h1>Sleep at sea level, <em>nine thousand feet up.</em></h1>
+        <p>Whole-home oxygen enrichment, sized to your elevation and commissioned room by room. Certified installers handle everything from rough-in to annual service.</p>
+        <div class="os-hero-actions">
+            <a asp-controller="Contact" asp-action="Index" class="btn-solid">Request a quote</a>
+            <a asp-controller="Catalog" asp-action="Index" class="btn-outline">Browse the catalog</a>
+        </div>
+    </div>
+    <div class="os-hero-img">
+        <img src="~/images/hero-bedroom.png" alt="Mountain home bedroom" />
+        <div class="os-hero-img-label">Big Sky, MT &mdash; 7,500 ft &middot; 4 zones</div>
+    </div>
+</section>
+
+<!-- ===== TICKER ===== -->
+<div class="os-ticker">
+    <div class="os-ticker-inner">
+        <span>Bozeman MT 4,820 ft</span><span class="teal">Big Sky MT 7,500 ft</span><span>Jackson WY 6,237 ft</span><span>Breckenridge CO 9,600 ft</span><span>Ketchum ID 5,853 ft</span><span>Park City UT 7,000 ft</span>
+        <span>Bozeman MT 4,820 ft</span><span class="teal">Big Sky MT 7,500 ft</span><span>Jackson WY 6,237 ft</span><span>Breckenridge CO 9,600 ft</span><span>Ketchum ID 5,853 ft</span><span>Park City UT 7,000 ft</span>
+    </div>
+</div>
+
+<!-- ===== WHY ===== -->
+<section id="os-why" class="os-why">
+    <div class="os-why-inner">
+        <div class="os-section-num">01</div>
+        <div class="os-why-content">
+            <h2>Above five thousand feet, indoor oxygen quietly drops. Sleep goes first.</h2>
+            <p>Restless nights, slow recovery, guests who wake up drained and blame the altitude. A properly enriched home changes that &mdash; most owners notice from the first night.</p>
+            <div class="os-stats-grid">
+                <div class="os-stat">
+                    <div class="os-stat-val">5,000<span class="os-stat-unit">ft</span></div>
+                    <div class="os-stat-label">Enrichment threshold</div>
+                </div>
+                <div class="os-stat">
+                    <div class="os-stat-val">8&ndash;32</div>
+                    <div class="os-stat-label">Zones per system</div>
+                </div>
+                <div class="os-stat">
+                    <div class="os-stat-val">24/7</div>
+                    <div class="os-stat-label">Continuous monitoring</div>
+                </div>
+                <div class="os-stat">
+                    <div class="os-stat-val">Night 1</div>
+                    <div class="os-stat-label">Most owners notice</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== SYSTEM ===== -->
+<section id="os-system" class="os-system">
+    <div class="os-system-inner">
+        <div class="os-section-eyebrow">02 &mdash; The system</div>
+        <h2>Set it once. It holds the house all night.</h2>
+        <p>Sensors read live concentration per room. The controller enriches to your altitude-equivalency setting, then cycles down on its own.</p>
+
+        <div class="os-system-display">
+            <div class="os-system-o2">
+                <div class="os-system-o2-num"><span id="os-system-o2-val">88.4</span><span class="os-system-o2-unit">%</span></div>
+                <div class="os-system-o2-label">Live O&#x2082; concentration</div>
+                <div class="o2-bar-wrap">
+                    <div class="o2-bar" style="--pct:62%"></div>
+                </div>
+            </div>
+
+            <div class="os-zone-grid">
+                <div class="os-zone">
+                    <div class="os-zone-name">Master Suite</div>
+                    <div class="os-zone-pct">88%</div>
+                    <div class="os-zone-bar"><div class="os-zone-fill" style="width:88%"></div></div>
+                </div>
+                <div class="os-zone">
+                    <div class="os-zone-name">Guest Room 1</div>
+                    <div class="os-zone-pct">89%</div>
+                    <div class="os-zone-bar"><div class="os-zone-fill" style="width:89%"></div></div>
+                </div>
+                <div class="os-zone">
+                    <div class="os-zone-name">Guest Room 2</div>
+                    <div class="os-zone-pct">82%</div>
+                    <div class="os-zone-bar"><div class="os-zone-fill" style="width:82%"></div></div>
+                </div>
+                <div class="os-zone os-zone-setting">
+                    <div class="os-zone-name">Altitude setting</div>
+                    <div class="os-zone-pct teal">6,500 ft</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== CATALOG PREVIEW ===== -->
+<section id="os-catalog" class="os-catalog-preview">
+    <div class="os-section-eyebrow">03 &mdash; Catalog</div>
+    <h2>Machines, controls and every fitting between them.</h2>
+
+    <div class="os-category-tiles">
+        <a asp-controller="Catalog" asp-action="Index" asp-route-category="Systems" class="os-cat-tile">
+            <div class="os-cat-tile-num">3</div>
+            <div class="os-cat-tile-label">Systems</div>
+            <div class="os-cat-tile-sub">machines</div>
+        </a>
+        <a asp-controller="Catalog" asp-action="Index" asp-route-category="Controls" class="os-cat-tile">
+            <div class="os-cat-tile-num">4</div>
+            <div class="os-cat-tile-label">Controls</div>
+            <div class="os-cat-tile-sub">packages</div>
+        </a>
+        <a asp-controller="Catalog" asp-action="Index" asp-route-category="Components" class="os-cat-tile">
+            <div class="os-cat-tile-num">4</div>
+            <div class="os-cat-tile-label">Components</div>
+            <div class="os-cat-tile-sub">parts</div>
+        </a>
+        <a asp-controller="Catalog" asp-action="Index" asp-route-category="Pneumatics" class="os-cat-tile">
+            <div class="os-cat-tile-num">5</div>
+            <div class="os-cat-tile-label">Pneumatics</div>
+            <div class="os-cat-tile-sub">fittings</div>
+        </a>
+    </div>
+
+    <div class="product-grid">
+        @foreach (var p in featured)
+        {
+            <div class="product-card">
+                @if (!string.IsNullOrEmpty(p.Tag))
+                {
+                    <div class="product-tag-badge">@p.Tag</div>
+                }
+                <a asp-controller="Catalog" asp-action="Detail" asp-route-id="@p.Id" class="product-card-img-link">
+                    <img src="~/images/@p.ImageFile" alt="@p.Name" class="product-card-img" />
+                </a>
+                <div class="product-card-body">
+                    <div class="product-card-meta">
+                        <span class="font-mono product-sku">@p.Sku</span>
+                        <span class="product-category">@p.Category</span>
+                    </div>
+                    <a asp-controller="Catalog" asp-action="Detail" asp-route-id="@p.Id" class="product-card-name font-serif">@p.Name</a>
+                    <div class="product-card-stock @(p.Stock == "In stock" ? "stock-in" : "stock-order")">@p.Stock</div>
+                    <div class="product-card-lead">@p.LeadTime</div>
+                    <button class="btn-add-quote" data-add-quote="@p.Id" data-name="@p.Name">Add to quote</button>
+                </div>
+            </div>
+        }
+    </div>
+
+    <div class="os-catalog-more">
+        <a asp-controller="Catalog" asp-action="Index" class="btn-outline">View all @ViewBag.ProductCount items &rarr;</a>
+    </div>
+</section>
+
+<!-- ===== VALUE PROPS ===== -->
+<section class="os-value-props">
+    <div class="os-value-props-inner">
+        <div class="os-value-prop">
+            <div class="os-value-prop-title">Free with every quote</div>
+            <div class="os-value-prop-body">Zone layout and equipment schedule at no charge.</div>
+        </div>
+        <div class="os-value-prop">
+            <div class="os-value-prop-title">3-year warranty</div>
+            <div class="os-value-prop-body">Parts and labor on all OxySpace systems.</div>
+        </div>
+        <div class="os-value-prop">
+            <div class="os-value-prop-title">Certified install</div>
+            <div class="os-value-prop-body">Factory-trained technicians in every market we serve.</div>
+        </div>
+        <div class="os-value-prop">
+            <div class="os-value-prop-title">Annual service</div>
+            <div class="os-value-prop-body">Filter replacement, calibration, and system check every year.</div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== TESTIMONIALS ===== -->
+<section class="os-testimonials">
+    <div class="os-testimonials-inner">
+        <blockquote class="os-testimonial">
+            <p class="os-testimonial-quote">&ldquo;Woke up feeling like I was back in Denver. We had tried everything &mdash; humidifiers, sleeping pills. The oxygen system solved it the first night.&rdquo;</p>
+            <footer class="os-testimonial-source">Big Sky Journal &mdash; Homeowner feature, 2024</footer>
+        </blockquote>
+        <blockquote class="os-testimonial">
+            <p class="os-testimonial-quote">&ldquo;The luxury mountain home market has quietly standardized on ambient oxygen enrichment. Buyers above 7,000 feet now expect it.&rdquo;</p>
+            <footer class="os-testimonial-source">Wall Street Journal &mdash; Real estate section, March 2025</footer>
+        </blockquote>
+    </div>
+</section>
+
+<!-- ===== CTA SPLIT ===== -->
+<section id="os-contact" class="os-cta-split">
+    <div class="os-cta-dark">
+        <div class="os-cta-label font-mono">Homeowner</div>
+        <h3>I want this in my home.</h3>
+        <p>Tell us your elevation and room count. We&rsquo;ll send a zone layout and equipment list within two business days.</p>
+        <a asp-controller="Contact" asp-action="Index" class="btn-solid">Request a quote</a>
+    </div>
+    <div class="os-cta-cream">
+        <div class="os-cta-label font-mono">Builder / installer</div>
+        <h3>I spec systems for high-end builds.</h3>
+        <p>Upload your floor plan. Our team returns a zone layout and equipment schedule your crew can rough in.</p>
+        <a asp-controller="Contact" asp-action="DesignService" class="btn-outline-dark">Design service</a>
+    </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="os-footer">
+    <div class="os-footer-inner">
+        <div class="os-footer-brand">
+            <div class="os-logo os-footer-logo">Oxygen <span>Solutions</span></div>
+            <p class="os-footer-desc">Oxygen enrichment systems for mountain homes &mdash; designed, installed and serviced by certified installers.</p>
+        </div>
+        <nav class="os-footer-nav">
+            <a asp-controller="Catalog" asp-action="Index">Catalog</a>
+            <a asp-controller="Contact" asp-action="DesignService">Design service</a>
+            <a asp-controller="Contact" asp-action="FindInstaller">Find installer</a>
+            <a asp-controller="Contact" asp-action="Index">Request a quote</a>
+            <a href="#" class="text-muted">Dealer login</a>
+        </nav>
+    </div>
+    <div class="os-footer-copy">&copy; 2026 Oxygen Solutions</div>
+</footer>

@@ -1,0 +1,55 @@
+@model List<OxygenSolutions.Models.Product>
+@{
+    ViewData["Title"] = "Equipment";
+    var categories = ViewBag.Categories as List<string> ?? new();
+    var activeCategory = ViewBag.ActiveCategory as string;
+}
+
+<div class="os-page-header">
+    <div class="os-section-eyebrow">03 &mdash; Catalog</div>
+    <h1 class="font-serif">Equipment</h1>
+    <p class="os-page-subhead">@ViewBag.ProductCount items across systems, controls, components and pneumatics.</p>
+</div>
+
+<div class="os-catalog-filters">
+    <a asp-action="Index" class="filter-tab @(string.IsNullOrEmpty(activeCategory) ? "active" : "")">All</a>
+    @foreach (var cat in categories)
+    {
+        <a asp-action="Index" asp-route-category="@cat" class="filter-tab @(activeCategory == cat ? "active" : "")">@cat</a>
+    }
+</div>
+
+@if (Model == null || !Model.Any())
+{
+    <div class="os-empty-state">
+        <p>No results match your search.</p>
+        <a asp-action="Index" class="btn-outline">Clear filter</a>
+    </div>
+}
+else
+{
+    <div class="product-grid">
+        @foreach (var p in Model)
+        {
+            <div class="product-card">
+                @if (!string.IsNullOrEmpty(p.Tag))
+                {
+                    <div class="product-tag-badge">@p.Tag</div>
+                }
+                <a asp-action="Detail" asp-route-id="@p.Id" class="product-card-img-link">
+                    <img src="~/images/@p.ImageFile" alt="@p.Name" class="product-card-img" />
+                </a>
+                <div class="product-card-body">
+                    <div class="product-card-meta">
+                        <span class="font-mono product-sku">@p.Sku</span>
+                        <span class="product-category">@p.Category</span>
+                    </div>
+                    <a asp-action="Detail" asp-route-id="@p.Id" class="product-card-name font-serif">@p.Name</a>
+                    <div class="product-card-stock @(p.Stock == "In stock" ? "stock-in" : "stock-order")">@p.Stock</div>
+                    <div class="product-card-lead">@p.LeadTime</div>
+                    <button class="btn-add-quote" data-add-quote="@p.Id" data-name="@p.Name">Add to quote</button>
+                </div>
+            </div>
+        }
+    </div>
+}

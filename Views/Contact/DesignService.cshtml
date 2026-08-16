@@ -1,0 +1,86 @@
+@model OxygenSolutions.Models.QuoteRequest
+@{
+    ViewData["Title"] = "Design Service";
+}
+
+<div class="os-page-header os-design-hero">
+    <div class="os-section-eyebrow">02 &mdash; Design Service</div>
+    <h2 class="font-serif">Need a custom layout for your project?</h2>
+    <p class="os-page-subhead">Use our design service to tell us your vision. Our team returns a zone layout and equipment schedule your crew can rough in.</p>
+</div>
+
+@if (TempData["Success"] != null)
+{
+    <div class="os-alert os-alert-success">
+        @TempData["Success"]
+    </div>
+}
+
+<div class="os-contact-layout">
+    <div class="os-contact-form-col">
+        <form asp-action="DesignService" method="post" class="os-form">
+            <div asp-validation-summary="ModelOnly" class="os-validation-summary"></div>
+
+            <div class="os-form-row">
+                <div class="os-form-group">
+                    <label asp-for="Name" class="font-mono">Name <span class="required">*</span></label>
+                    <input asp-for="Name" class="os-input" placeholder="Your full name" />
+                    <span asp-validation-for="Name" class="os-field-error"></span>
+                </div>
+                <div class="os-form-group">
+                    <label asp-for="Email" class="font-mono">Email <span class="required">*</span></label>
+                    <input asp-for="Email" class="os-input" placeholder="you@example.com" />
+                    <span asp-validation-for="Email" class="os-field-error"></span>
+                </div>
+            </div>
+
+            <div class="os-form-row">
+                <div class="os-form-group">
+                    <label asp-for="Phone" class="font-mono">Phone</label>
+                    <input asp-for="Phone" class="os-input" placeholder="(406) 555-0100" />
+                </div>
+                <div class="os-form-group">
+                    <label asp-for="Elevation" class="font-mono">Site elevation <span class="required">*</span></label>
+                    <input asp-for="Elevation" class="os-input" placeholder="e.g. 7,500 ft" />
+                    <span asp-validation-for="Elevation" class="os-field-error"></span>
+                </div>
+            </div>
+
+            <div class="os-form-group">
+                <label asp-for="Rooms" class="font-mono">Rooms / zones to enrich</label>
+                <textarea asp-for="Rooms" class="os-textarea" rows="3" placeholder="e.g. 4 bedrooms, great room, office — include square footage if known"></textarea>
+            </div>
+
+            <input type="hidden" asp-for="ProjectType" value="Builder" />
+
+            <div class="os-form-group">
+                <label asp-for="Message" class="font-mono">Project details</label>
+                <textarea asp-for="Message" class="os-textarea" rows="5" placeholder="Tell us about the build — timeline, number of units, special requirements, architect or builder name..."></textarea>
+            </div>
+
+            <button type="submit" class="btn-solid">Send request</button>
+        </form>
+    </div>
+
+    <div class="os-contact-info-col">
+        <div class="os-contact-info-card">
+            <h3 class="font-serif">What you get</h3>
+            <ul class="os-design-benefits">
+                <li>Zone-by-zone layout mapped to your floor plan</li>
+                <li>Full equipment schedule with SKUs and quantities</li>
+                <li>Rough-in notes your HVAC crew can follow</li>
+                <li>Delivered within 2 business days</li>
+                <li>Free of charge, no obligation</li>
+            </ul>
+            <hr class="os-contact-divider" />
+            <div class="os-contact-item">
+                <div class="os-contact-item-label font-mono">Email</div>
+                <a href="mailto:jlausen@oxygen-solutions.net">jlausen@oxygen-solutions.net</a>
+            </div>
+            <div class="os-contact-item">
+                <div class="os-contact-item-label font-mono">Phone</div>
+                <a href="tel:4062094450">(406) 209-4450</a>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,105 @@
+@model OxygenSolutions.Models.Product
+@{
+    ViewData["Title"] = Model.Name;
+    var related = ViewBag.Related as List<OxygenSolutions.Models.Product> ?? new();
+}
+
+<div class="os-breadcrumb font-mono">
+    <a asp-controller="Catalog" asp-action="Index">Equipment</a>
+    <span class="breadcrumb-sep">/</span>
+    <span>@Model.Name</span>
+</div>
+
+<div class="os-product-detail">
+    <div class="os-product-img-col">
+        <div class="os-product-img-wrap">
+            <img src="~/images/@Model.ImageFile" alt="@Model.Name" class="os-product-img" />
+        </div>
+    </div>
+
+    <div class="os-product-info-col">
+        <div class="product-card-meta" style="margin-bottom:12px">
+            <span class="font-mono product-sku">@Model.Sku</span>
+            <span class="product-category">@Model.Category</span>
+        </div>
+
+        @if (!string.IsNullOrEmpty(Model.Tag))
+        {
+            <div class="product-tag-badge product-tag-inline">@Model.Tag</div>
+        }
+
+        <h1 class="font-serif os-product-name">@Model.Name</h1>
+
+        <div class="os-product-stock">
+            <span class="product-card-stock @(Model.Stock == "In stock" ? "stock-in" : "stock-order")">@Model.Stock</span>
+            @if (!string.IsNullOrEmpty(Model.LeadTime))
+            {
+                <span class="os-product-lead font-mono">@Model.LeadTime</span>
+            }
+        </div>
+
+        @if (!string.IsNullOrEmpty(Model.Description))
+        {
+            <p class="os-product-desc">@Model.Description</p>
+        }
+
+        @if (Model.Features.Any())
+        {
+            <ul class="os-product-features">
+                @foreach (var feature in Model.Features)
+                {
+                    <li>@feature</li>
+                }
+            </ul>
+        }
+
+        @if (Model.Variants.Any())
+        {
+            <div class="os-product-variants">
+                <div class="os-variants-label font-mono">Available options</div>
+                <div class="os-variants-btns">
+                    @foreach (var v in Model.Variants)
+                    {
+                        <button class="btn-variant">@v</button>
+                    }
+                </div>
+            </div>
+        }
+
+        <div class="os-product-actions">
+            <button class="btn-solid btn-add-quote" data-add-quote="@Model.Id" data-name="@Model.Name">Add to quote list</button>
+            <a asp-controller="Contact" asp-action="Index" class="btn-outline">Request a quote</a>
+        </div>
+    </div>
+</div>
+
+@if (related.Any())
+{
+    <div class="os-related">
+        <h2 class="font-serif os-related-heading">Related equipment</h2>
+        <div class="product-grid">
+            @foreach (var p in related)
+            {
+                <div class="product-card">
+                    @if (!string.IsNullOrEmpty(p.Tag))
+                    {
+                        <div class="product-tag-badge">@p.Tag</div>
+                    }
+                    <a asp-action="Detail" asp-route-id="@p.Id" class="product-card-img-link">
+                        <img src="~/images/@p.ImageFile" alt="@p.Name" class="product-card-img" />
+                    </a>
+                    <div class="product-card-body">
+                        <div class="product-card-meta">
+                            <span class="font-mono product-sku">@p.Sku</span>
+                            <span class="product-category">@p.Category</span>
+                        </div>
+                        <a asp-action="Detail" asp-route-id="@p.Id" class="product-card-name font-serif">@p.Name</a>
+                        <div class="product-card-stock @(p.Stock == "In stock" ? "stock-in" : "stock-order")">@p.Stock</div>
+                        <div class="product-card-lead">@p.LeadTime</div>
+                        <button class="btn-add-quote" data-add-quote="@p.Id" data-name="@p.Name">Add to quote</button>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+}

@@ -1,0 +1,97 @@
+@model OxygenSolutions.Models.QuoteRequest
+@{
+    ViewData["Title"] = "Request a Quote";
+}
+
+<div class="os-page-header">
+    <div class="os-section-eyebrow">04 &mdash; Get in touch</div>
+    <h1 class="font-serif">Request a Quote</h1>
+    <p class="os-page-subhead">We&rsquo;ll send a zone layout and equipment list within 1&ndash;2 business days. No obligation.</p>
+</div>
+
+@if (TempData["Success"] != null)
+{
+    <div class="os-alert os-alert-success">
+        @TempData["Success"]
+    </div>
+}
+
+<div class="os-contact-layout">
+    <div class="os-contact-form-col">
+        <form asp-action="Index" method="post" class="os-form">
+            <div asp-validation-summary="ModelOnly" class="os-validation-summary"></div>
+
+            <div class="os-form-row">
+                <div class="os-form-group">
+                    <label asp-for="Name" class="font-mono">Name <span class="required">*</span></label>
+                    <input asp-for="Name" class="os-input" placeholder="Your full name" />
+                    <span asp-validation-for="Name" class="os-field-error"></span>
+                </div>
+                <div class="os-form-group">
+                    <label asp-for="Email" class="font-mono">Email <span class="required">*</span></label>
+                    <input asp-for="Email" class="os-input" placeholder="you@example.com" />
+                    <span asp-validation-for="Email" class="os-field-error"></span>
+                </div>
+            </div>
+
+            <div class="os-form-row">
+                <div class="os-form-group">
+                    <label asp-for="Phone" class="font-mono">Phone</label>
+                    <input asp-for="Phone" class="os-input" placeholder="(406) 555-0100" />
+                </div>
+                <div class="os-form-group">
+                    <label asp-for="Elevation" class="font-mono">Elevation <span class="required">*</span></label>
+                    <input asp-for="Elevation" class="os-input" placeholder="e.g. 7,500 ft" />
+                    <span asp-validation-for="Elevation" class="os-field-error"></span>
+                </div>
+            </div>
+
+            <div class="os-form-group">
+                <label asp-for="Rooms" class="font-mono">Rooms / zones</label>
+                <textarea asp-for="Rooms" class="os-textarea" rows="3" placeholder="e.g. Master bedroom, 2 guest rooms, great room"></textarea>
+            </div>
+
+            <div class="os-form-group">
+                <label class="font-mono">Project type</label>
+                <div class="os-radio-group">
+                    <label class="os-radio-label">
+                        <input type="radio" asp-for="ProjectType" value="Homeowner" />
+                        Homeowner
+                    </label>
+                    <label class="os-radio-label">
+                        <input type="radio" asp-for="ProjectType" value="Builder" />
+                        Builder / Installer
+                    </label>
+                </div>
+            </div>
+
+            <div class="os-form-group">
+                <label asp-for="Message" class="font-mono">Message</label>
+                <textarea asp-for="Message" class="os-textarea" rows="4" placeholder="Anything else we should know about your project..."></textarea>
+            </div>
+
+            <button type="submit" class="btn-solid">Send request</button>
+        </form>
+    </div>
+
+    <div class="os-contact-info-col">
+        <div class="os-contact-info-card">
+            <h3 class="font-serif">Get in touch directly</h3>
+            <div class="os-contact-item">
+                <div class="os-contact-item-label font-mono">Email</div>
+                <a href="mailto:jlausen@oxygen-solutions.net">jlausen@oxygen-solutions.net</a>
+            </div>
+            <div class="os-contact-item">
+                <div class="os-contact-item-label font-mono">Phone</div>
+                <a href="tel:4062094450">(406) 209-4450</a>
+            </div>
+            <div class="os-contact-item">
+                <div class="os-contact-item-label font-mono">Markets served</div>
+                <p>Colorado &middot; Montana &middot; Wyoming &middot; Idaho &middot; Utah</p>
+            </div>
+            <hr class="os-contact-divider" />
+            <p class="os-contact-note">We respond to all requests within 1&ndash;2 business days. Every quote includes a free zone layout and equipment schedule.</p>
+            <a asp-controller="Contact" asp-action="FindInstaller" class="btn-outline-dark" style="margin-top:20px;display:inline-block">Find a certified installer</a>
+        </div>
+    </div>
+</div>

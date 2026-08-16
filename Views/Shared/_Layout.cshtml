@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] — Oxygen Solutions</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body class="os-body">
+
+    <!-- Quote panel overlay -->
+    <div class="quote-panel" id="quote-panel">
+        <div class="quote-panel-backdrop" id="close-quote-backdrop"></div>
+        <div class="quote-panel-inner">
+            <div class="quote-panel-header">
+                <span class="font-serif" style="font-size:23px">Quote list</span>
+                <button id="close-quote">&#x2715;</button>
+            </div>
+            <div class="quote-panel-body" id="quote-panel-body">
+                <p class="text-muted" style="padding:40px 0;text-align:center">Nothing here yet.<br>Add equipment and we price the whole list at once.</p>
+            </div>
+            <div class="quote-panel-footer">
+                <a asp-controller="Contact" asp-action="Index" class="btn-solid">Request pricing</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="os-shell">
+
+        <!-- Sidebar (desktop) -->
+        <aside class="os-sidebar">
+            <a asp-controller="Home" asp-action="Index" class="os-logo">Oxygen <span>Solutions</span></a>
+
+            <nav class="os-nav">
+                <ul>
+                    <li>
+                        <a href="/#os-why" data-nav="os-why" data-scroll="os-why">
+                            <span class="nav-num">01</span> Why altitude
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/#os-system" data-nav="os-system" data-scroll="os-system">
+                            <span class="nav-num">02</span> The system
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="Catalog" asp-action="Index" data-nav="os-catalog">
+                            <span class="nav-num">03</span> Equipment
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="Contact" asp-action="Index" data-nav="os-contact">
+                            <span class="nav-num">04</span> Get in touch
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+            <div id="os-o2-widget" class="os-o2-widget">
+                <div class="o2-label">Live network</div>
+                <div class="o2-value-row">
+                    <span id="o2-value">88.4</span>
+                    <span class="o2-unit">% O&#x2082;</span>
+                </div>
+                <div class="o2-bar-wrap">
+                    <div id="o2-bar" class="o2-bar" style="--pct:62%"></div>
+                </div>
+                <div class="o2-status">
+                    <span id="o2-pulse" class="o2-pulse"></span>
+                    Enriching &middot; 6,500 ft
+                </div>
+            </div>
+
+            <div class="os-sidebar-cta">
+                <button class="btn-quote-list" id="open-quote-panel">
+                    Quote list <span class="quote-badge" id="quote-badge">0</span>
+                </button>
+                <a asp-controller="Contact" asp-action="Index" class="btn-solid">Request a quote</a>
+                <a href="#" class="btn-ghost btn-dealer-login">Dealer login</a>
+            </div>
+        </aside>
+
+        <!-- Mobile header -->
+        <header class="os-mobile-header">
+            <button class="hamburger" id="mobile-menu-btn" aria-label="Open menu">
+                <svg width="22" height="16" viewBox="0 0 22 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect y="0" width="22" height="2" rx="1" fill="currentColor"/>
+                    <rect y="7" width="22" height="2" rx="1" fill="currentColor"/>
+                    <rect y="14" width="22" height="2" rx="1" fill="currentColor"/>
+                </svg>
+            </button>
+            <a asp-controller="Home" asp-action="Index" class="os-logo os-logo-mobile">Oxygen <span>Solutions</span></a>
+            <button class="btn-quote-mobile" id="open-quote-panel-mobile">
+                Quote <span class="quote-badge" id="quote-badge-mobile">0</span>
+            </button>
+            <nav class="os-mobile-nav" id="os-mobile-nav">
+                <ul>
+                    <li><a href="/#os-why" data-scroll="os-why"><span class="nav-num">01</span> Why altitude</a></li>
+                    <li><a href="/#os-system" data-scroll="os-system"><span class="nav-num">02</span> The system</a></li>
+                    <li><a asp-controller="Catalog" asp-action="Index"><span class="nav-num">03</span> Equipment</a></li>
+                    <li><a asp-controller="Contact" asp-action="Index"><span class="nav-num">04</span> Get in touch</a></li>
+                </ul>
+                <div class="mobile-nav-cta">
+                    <a asp-controller="Contact" asp-action="Index" class="btn-solid">Request a quote</a>
+                </div>
+            </nav>
+        </header>
+
+        <!-- Main content -->
+        <main class="os-main">
+            @RenderBody()
+            @await RenderSectionAsync("Scripts", required: false)
+        </main>
+
+    </div>
+
+    <script src="~/js/site.js" asp-append-version="true"></script>
+</body>
+</html>
