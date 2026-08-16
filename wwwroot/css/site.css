@@ -898,3 +898,199 @@ ul, ol { list-style: none; }
   .os-alert-success { margin: 0 16px; }
   .os-installer-cta { padding: 16px 16px 28px; }
 }
+
+
+/* ================================================================
+   RESPONSIVE PATCH v2 — fixes horizontal overflow + all breakpoints
+   ================================================================ */
+
+/* ── Global overflow lock ─────────────────────────────────────── */
+html { overflow-x: hidden; }
+body { overflow-x: hidden; max-width: 100vw; }
+.os-shell { overflow-x: hidden; }
+.os-main  { overflow-x: hidden; min-width: 0; width: 100%; }
+
+/* Every section must not overflow */
+.os-hero, .os-ticker-wrap, .os-why, .os-system,
+.os-catalog-preview, .os-value-props, .os-testimonials,
+.os-cta-split, .os-footer, .os-page-header,
+.os-catalog-filters, .os-product-detail, .os-contact-layout,
+.os-installer-grid, .os-installer-cta, .os-related,
+.os-breadcrumb { max-width: 100%; box-sizing: border-box; }
+
+/* Fix hero flex-basis so it never forces overflow */
+.os-hero-text { min-width: 0; flex-basis: 0; flex-grow: 1; }
+.os-hero-img  { min-width: 0; }
+
+/* Fix catalog preview — symmetric padding, contained grid */
+.os-catalog-preview { padding-right: clamp(28px,4cqw,56px); }
+.os-category-tiles  { margin-right: 0 !important; max-width: 100%; }
+.product-grid        { margin-right: 0 !important; max-width: 100%; }
+.os-catalog-more     { padding-right: 0 !important; }
+
+/* Ticker must not push page width */
+.os-ticker-wrap { overflow: hidden; }
+.os-ticker-inner { will-change: transform; }
+
+/* ── 960px ────────────────────────────────────────────────────── */
+@media (max-width: 960px) {
+  .os-hero { flex-direction: column; min-height: auto; }
+  .os-hero-text { flex: 1 1 auto; width: 100%; padding: 40px 24px 36px; }
+  .os-hero-img  { flex: none; width: 100%; min-height: 260px; }
+
+  .os-why-inner { flex-direction: column; gap: 20px; }
+  .os-section-num { font-size: 56px; }
+
+  .os-stats-grid { grid-template-columns: 1fr 1fr; }
+  .os-stat:nth-child(2) { border-right: none; }
+  .os-stat:nth-child(1),
+  .os-stat:nth-child(2) { border-bottom: 1px solid var(--border-c); }
+
+  .os-system-display { flex-direction: column; align-items: flex-start; gap: 24px; }
+  .os-system .o2-bar-wrap { width: 100%; }
+
+  .os-zone-grid { grid-template-columns: 1fr 1fr; margin-top: 0; }
+  .os-zone:nth-child(2) { border-right: none; }
+
+  .os-value-props-inner { grid-template-columns: 1fr 1fr; }
+  .os-value-prop:nth-child(2) { border-right: none; }
+  .os-value-prop:nth-child(1),
+  .os-value-prop:nth-child(2) { border-bottom: 1px solid var(--border-d); }
+
+  .os-product-detail { grid-template-columns: 1fr; gap: 28px; }
+  .os-product-img-wrap { max-width: 400px; }
+
+  .os-contact-layout { grid-template-columns: 1fr; }
+  .os-contact-form-col { border-right: none; border-bottom: 1px solid var(--border-c); }
+
+  .os-footer-inner { flex-direction: column; gap: 28px; }
+
+  .os-category-tiles { grid-template-columns: 1fr 1fr; }
+}
+
+/* ── 768px ────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  /* Shell */
+  .os-sidebar       { display: none !important; }
+  .os-mobile-header { display: flex !important; }
+
+  /* Hero */
+  .os-hero-text { padding: 32px 20px 28px; }
+  .os-hero-img  { min-height: 220px; }
+
+  /* Sections — use vw-based padding instead of cqw */
+  .os-why           { padding: 36px 20px 0; }
+  .os-system        { padding: 36px 20px; margin-top: 32px; }
+  .os-catalog-preview { padding: 36px 20px; }
+  .os-value-props   { padding: 36px 20px; }
+  .os-testimonials  { padding: 36px 20px; }
+  .os-footer        { padding: 36px 20px 24px; }
+  .os-page-header   { padding: 28px 20px 24px; }
+  .os-catalog-filters { padding: 14px 20px; }
+  .os-product-detail  { padding: 24px 20px; }
+  .os-related         { padding: 24px 20px; }
+  .os-breadcrumb      { padding: 12px 20px; }
+  .os-contact-form-col { padding: 28px 20px; }
+  .os-contact-info-col { padding: 28px 20px; }
+  .os-installer-grid  { padding: 24px 20px; grid-template-columns: 1fr; gap: 16px; }
+  .os-installer-cta   { padding: 20px 20px 32px; }
+  .os-alert-success   { margin: 0 20px; }
+
+  /* Typography */
+  .os-page-header h1, .os-page-header h2 { font-size: clamp(22px,6vw,36px); }
+
+  /* Grids */
+  .os-zone-grid          { grid-template-columns: 1fr 1fr; }
+  .os-category-tiles     { grid-template-columns: 1fr 1fr; }
+  .product-grid          { grid-template-columns: repeat(auto-fill, minmax(150px,1fr)); padding: 0; }
+  .os-testimonials-inner { grid-template-columns: 1fr; gap: 24px; }
+  .os-form-row           { grid-template-columns: 1fr; gap: 0; }
+
+  /* CTA split */
+  .os-cta-split  { flex-direction: column; }
+  .os-cta-dark, .os-cta-cream { padding: 32px 20px; }
+
+  /* Footer nav */
+  .os-footer-inner { padding-bottom: 20px; }
+  .os-footer-nav   { flex-direction: row; flex-wrap: wrap; gap: 12px 20px; }
+}
+
+/* ── 640px ────────────────────────────────────────────────────── */
+@media (max-width: 640px) {
+  /* All multi-col grids → 1 col */
+  .os-stats-grid    { grid-template-columns: 1fr; }
+  .os-stat          { border-right: none !important; border-bottom: 1px solid var(--border-c); }
+  .os-stat:last-child { border-bottom: none; }
+
+  .os-zone-grid { grid-template-columns: 1fr; }
+  .os-zone      { border-right: none !important; border-bottom: 1px solid var(--border-d); }
+  .os-zone:last-child { border-bottom: none; }
+
+  .os-value-props-inner { grid-template-columns: 1fr; }
+  .os-value-prop        { border-right: none !important; border-bottom: 1px solid var(--border-d); }
+  .os-value-prop:last-child { border-bottom: none; }
+
+  .os-category-tiles { grid-template-columns: 1fr 1fr; }
+  .product-grid      { grid-template-columns: 1fr 1fr; }
+
+  /* Full-width buttons */
+  .os-hero-actions, .os-product-actions { flex-direction: column; }
+  .os-hero-actions .btn-solid, .os-hero-actions .btn-outline,
+  .os-product-actions .btn-solid, .os-product-actions .btn-outline { width: 100%; text-align: center; }
+
+  /* O2 number */
+  .os-system-o2-num span:first-child { font-size: 68px; }
+
+  /* Ticker */
+  .os-ticker-inner { font-size: 9px; letter-spacing: .14em; }
+  .os-ticker-inner span { padding-right: 20px; }
+
+  /* Footer */
+  .os-footer-nav { flex-direction: column; gap: 10px; }
+}
+
+/* ── 480px ────────────────────────────────────────────────────── */
+@media (max-width: 480px) {
+  .os-hero-text      { padding: 28px 16px 24px; }
+  .os-why            { padding: 28px 16px 0; }
+  .os-system         { padding: 28px 16px; }
+  .os-catalog-preview{ padding: 28px 16px; }
+  .os-value-props    { padding: 28px 16px; }
+  .os-testimonials   { padding: 28px 16px; }
+  .os-footer         { padding: 28px 16px 20px; }
+  .os-page-header    { padding: 24px 16px 20px; }
+  .os-page-header h1, .os-page-header h2 { font-size: 24px; }
+  .os-catalog-filters{ padding: 12px 16px; }
+  .os-product-detail { padding: 20px 16px; }
+  .os-related        { padding: 20px 16px; }
+  .os-breadcrumb     { padding: 10px 16px; }
+  .os-contact-form-col { padding: 24px 16px; }
+  .os-contact-info-col { padding: 24px 16px; }
+  .os-installer-grid  { padding: 20px 16px; }
+  .os-installer-cta   { padding: 16px 16px 28px; }
+  .os-cta-dark, .os-cta-cream { padding: 28px 16px; }
+  .os-alert-success   { margin: 0 16px; }
+
+  .os-category-tiles { grid-template-columns: 1fr; }
+  .product-grid      { grid-template-columns: 1fr; }
+
+  .os-logo-mobile { font-size: 15px; }
+}
+
+/* ── 375px (small phones) ─────────────────────────────────────── */
+@media (max-width: 375px) {
+  .os-hero-text      { padding: 24px 14px 20px; }
+  .os-why            { padding: 24px 14px 0; }
+  .os-system         { padding: 24px 14px; }
+  .os-catalog-preview{ padding: 24px 14px; }
+  .os-value-props    { padding: 24px 14px; }
+  .os-testimonials   { padding: 24px 14px; }
+  .os-footer         { padding: 24px 14px 16px; }
+  .os-page-header    { padding: 20px 14px 16px; }
+  .os-page-header h1, .os-page-header h2 { font-size: 22px; }
+  .os-catalog-filters { padding: 10px 14px; }
+  .os-product-detail  { padding: 18px 14px; }
+  .os-contact-form-col { padding: 20px 14px; }
+  .os-contact-info-col { padding: 20px 14px; }
+  .os-installer-grid   { padding: 18px 14px; }
+}
