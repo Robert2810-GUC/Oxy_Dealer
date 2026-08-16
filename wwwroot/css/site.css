@@ -1094,3 +1094,70 @@ body { overflow-x: hidden; max-width: 100vw; }
   .os-contact-info-col { padding: 20px 14px; }
   .os-installer-grid   { padding: 18px 14px; }
 }
+
+
+/* ================================================================
+   MOBILE SHELL FIX — root cause: shell stays flex-row on mobile,
+   mobile-header becomes a narrow left column pushing main right.
+   Fix: column direction + explicit widths.
+   ================================================================ */
+
+@media (max-width: 768px) {
+
+  /* Stack shell vertically so mobile-header is on top, main below */
+  .os-shell {
+    flex-direction: column !important;
+  }
+
+  .os-sidebar {
+    display: none !important;
+    width: 0 !important;
+  }
+
+  .os-mobile-header {
+    display: flex !important;
+    width: 100% !important;
+    order: 0;
+    flex-shrink: 0;
+  }
+
+  .os-main {
+    flex: 1 1 auto !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    order: 1;
+  }
+
+  /* Hero: force column, full width children */
+  .os-hero {
+    flex-direction: column !important;
+    min-height: auto !important;
+    flex-wrap: nowrap !important;
+  }
+  .os-hero-text {
+    width: 100% !important;
+    flex: none !important;
+    min-width: 0 !important;
+    padding: 32px 20px 28px !important;
+    box-sizing: border-box !important;
+  }
+  .os-hero-img {
+    width: 100% !important;
+    flex: none !important;
+    min-width: 0 !important;
+    min-height: 220px !important;
+  }
+
+  /* Catalog preview — symmetric padding, no bleed */
+  .os-catalog-preview {
+    padding: 36px 20px !important;
+  }
+  .os-category-tiles,
+  .product-grid { margin-right: 0 !important; }
+}
+
+@media (max-width: 480px) {
+  .os-hero-text { padding: 28px 16px 24px !important; }
+  .os-catalog-preview { padding: 28px 16px !important; }
+}
