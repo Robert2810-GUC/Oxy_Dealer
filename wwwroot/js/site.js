@@ -128,11 +128,13 @@
     if (!quotePanel) return;
     lockScroll();
     quotePanel.classList.add('open');
+    if (closeBackdrop) closeBackdrop.classList.add('open');
   }
 
   function closeQuotePanel() {
     if (!quotePanel) return;
     quotePanel.classList.remove('open');
+    if (closeBackdrop) closeBackdrop.classList.remove('open');
     unlockScroll();
   }
 
