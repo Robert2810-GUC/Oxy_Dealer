@@ -22,6 +22,16 @@ app.MapControllerRoute(
     defaults: new { controller = "Catalog", action = "Detail" });
 
 app.MapControllerRoute(
+    name: "why",
+    pattern: "why",
+    defaults: new { controller = "Home", action = "Why" });
+
+app.MapControllerRoute(
+    name: "system",
+    pattern: "system",
+    defaults: new { controller = "Home", action = "TheSystem" });
+
+app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}")
     .WithStaticAssets();

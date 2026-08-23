@@ -12,4 +12,8 @@ public class HomeController : Controller
         ViewBag.ProductCount = ProductData.Products.Count;
         return View();
     }
+
+    public IActionResult Why() => View();
+
+    public IActionResult TheSystem() => View();
 }
