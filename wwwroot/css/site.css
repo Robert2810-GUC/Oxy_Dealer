@@ -1472,3 +1472,15 @@ body { overflow-x: hidden; max-width: 100vw; }
   .pq-modal { width: 100vw; }
   .pq-modal-body { padding: 20px 16px 28px; }
 }
+
+
+/* ── Contact section label ────────────────────────────────────── */
+.os-contact-section-label {
+  font-size: 9px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--border-c);
+  margin-bottom: 20px;
+}

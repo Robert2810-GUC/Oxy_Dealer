@@ -6,13 +6,14 @@ namespace OxygenSolutions.Controllers;
 
 public class ContactController : Controller
 {
-    public IActionResult Index() => View(new QuoteRequest());
+    public IActionResult Index() => View(new GeneralInquiry());
 
     [HttpPost]
-    public IActionResult Index(QuoteRequest model)
+    public IActionResult Index(GeneralInquiry model)
     {
         if (!ModelState.IsValid) return View(model);
-        TempData["Success"] = "Thank you! We'll be in touch within 1–2 business days.";
+        Console.WriteLine($"[Inquiry] {model.FirstName} {model.LastName} <{model.Email}> — {model.Subject}");
+        TempData["Success"] = "Thank you for your message. Our team will get back to you shortly.";
         return RedirectToAction(nameof(Index));
     }
 
