@@ -5,26 +5,139 @@
 
 <div class="os-page-header os-design-hero">
     <div class="os-section-eyebrow">02 &mdash; Design Service</div>
-    <h2 class="font-serif">Need a custom layout for your project?</h2>
-    <p class="os-page-subhead">Use our design service to tell us your vision. Our team returns a zone layout and equipment schedule your crew can rough in.</p>
+    <h2 class="font-serif">Drawings before anything gets opened up.</h2>
+    <p class="os-page-subhead">A zone layout and equipment schedule sized to the house, not a catalogue guess. 5 working days &middot; No charge &middot; PDF + DWG delivered.</p>
 </div>
 
-@if (TempData["Success"] != null)
-{
-    <div class="os-alert os-alert-success">
-        @TempData["Success"]
+<!-- What you get back -->
+<section class="ds-section ds-what">
+    <div class="ds-section-label font-mono">01 &mdash; What you get back</div>
+    <h2 class="font-serif ds-section-heading">A package your mechanical crew can build from.</h2>
+    <div class="ds-deliverables">
+        <div class="ds-deliverable">
+            <div class="ds-deliverable-icon font-mono">&#9632;</div>
+            <div>
+                <h3>Zone-by-zone layout</h3>
+                <p>Mapped to your floor plan, showing equipment placement and distribution runs for each enriched room.</p>
+            </div>
+        </div>
+        <div class="ds-deliverable">
+            <div class="ds-deliverable-icon font-mono">&#9632;</div>
+            <div>
+                <h3>Equipment schedule</h3>
+                <p>Full bill of materials with SKUs and quantities, ready for your purchase order.</p>
+            </div>
+        </div>
+        <div class="ds-deliverable">
+            <div class="ds-deliverable-icon font-mono">&#9632;</div>
+            <div>
+                <h3>Rough-in drawings</h3>
+                <p>Sheet M-4 style drawings your HVAC crew can follow for rough-in. Includes penetration locations and clearances.</p>
+            </div>
+        </div>
+        <div class="ds-deliverable">
+            <div class="ds-deliverable-icon font-mono">&#9632;</div>
+            <div>
+                <h3>Commissioning notes</h3>
+                <p>Zone balancing targets and sensor calibration guidance for the certified installer.</p>
+            </div>
+        </div>
     </div>
-}
+</section>
 
+<!-- How it runs -->
+<section class="ds-section ds-how">
+    <div class="ds-section-label font-mono">02 &mdash; How it runs</div>
+    <h2 class="font-serif ds-section-heading">Five working days, start to schedule.</h2>
+    <div class="ds-steps">
+        <div class="ds-step">
+            <span class="ds-step-num font-mono">01</span>
+            <div>
+                <h3>Send your plans</h3>
+                <p>Upload floor plans and fill in the project details below. PDF or DWG accepted.</p>
+            </div>
+        </div>
+        <div class="ds-step">
+            <span class="ds-step-num font-mono">02</span>
+            <div>
+                <h3>Sizing review</h3>
+                <p>A designer reviews elevation, bedroom count, ceiling volume, and construction type to size the machine correctly.</p>
+            </div>
+        </div>
+        <div class="ds-step">
+            <span class="ds-step-num font-mono">03</span>
+            <div>
+                <h3>Layout &amp; schedule</h3>
+                <p>Zone layout, equipment schedule, and rough-in drawings are prepared and packaged as PDF and DWG.</p>
+            </div>
+        </div>
+        <div class="ds-step">
+            <span class="ds-step-num font-mono">04</span>
+            <div>
+                <h3>Walkthrough call</h3>
+                <p>Optional 30-minute call to walk through the layout with your team or architect before rough-in begins.</p>
+            </div>
+        </div>
+    </div>
+    <p class="ds-note font-mono">Fast-track available for projects already framed &mdash; contact us directly.</p>
+</section>
+
+<!-- Form -->
 <div class="os-contact-layout">
     <div class="os-contact-form-col">
+        <div class="ds-form-label font-mono">03 &mdash; Send your plans</div>
+
+        @if (TempData["Success"] != null)
+        {
+            <div class="os-alert os-alert-success" style="margin: 0 0 24px;">
+                @TempData["Success"]
+            </div>
+        }
+
         <form asp-action="DesignService" method="post" class="os-form">
             <div asp-validation-summary="ModelOnly" class="os-validation-summary"></div>
 
             <div class="os-form-row">
                 <div class="os-form-group">
+                    <label class="font-mono">Project type</label>
+                    <div class="os-radio-group">
+                        <label class="os-radio-label">
+                            <input type="radio" asp-for="ProjectType" value="New build" /> New build
+                        </label>
+                        <label class="os-radio-label">
+                            <input type="radio" asp-for="ProjectType" value="Remodel" /> Remodel
+                        </label>
+                    </div>
+                </div>
+                <div class="os-form-group">
+                    <label class="font-mono">Stage on site</label>
+                    <div class="os-radio-group">
+                        <label class="os-radio-label">
+                            <input type="radio" asp-for="ProjectType" value="Pre-framing" /> Pre-framing
+                        </label>
+                        <label class="os-radio-label">
+                            <input type="radio" asp-for="ProjectType" value="Framed" /> Framed
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="os-form-row">
+                <div class="os-form-group">
+                    <label asp-for="Rooms" class="font-mono">Bedrooms to enrich</label>
+                    <input asp-for="Rooms" class="os-input" placeholder="e.g. 4 bedrooms, great room, office" />
+                </div>
+                <div class="os-form-group">
+                    <label asp-for="Elevation" class="font-mono">Site elevation <span class="required">*</span></label>
+                    <input asp-for="Elevation" class="os-input" placeholder="e.g. 7,500 ft" />
+                    <span asp-validation-for="Elevation" class="os-field-error"></span>
+                </div>
+            </div>
+
+            <div class="os-form-row">
+                <div class="os-form-group">
                     <label asp-for="Name" class="font-mono">Name <span class="required">*</span></label>
-                    <input asp-for="Name" class="os-input" placeholder="Your full name" />
+                    <input asp-for="Name" class="os-input" placeholder="Jane Smith" />
                     <span asp-validation-for="Name" class="os-field-error"></span>
                 </div>
                 <div class="os-form-group">
@@ -34,42 +147,27 @@
                 </div>
             </div>
 
-            <div class="os-form-row">
-                <div class="os-form-group">
-                    <label asp-for="Phone" class="font-mono">Phone</label>
-                    <input asp-for="Phone" class="os-input" placeholder="(406) 555-0100" />
-                </div>
-                <div class="os-form-group">
-                    <label asp-for="Elevation" class="font-mono">Site elevation <span class="required">*</span></label>
-                    <input asp-for="Elevation" class="os-input" placeholder="e.g. 7,500 ft" />
-                    <span asp-validation-for="Elevation" class="os-field-error"></span>
-                </div>
-            </div>
-
             <div class="os-form-group">
-                <label asp-for="Rooms" class="font-mono">Rooms / zones to enrich</label>
-                <textarea asp-for="Rooms" class="os-textarea" rows="3" placeholder="e.g. 4 bedrooms, great room, office — include square footage if known"></textarea>
+                <label asp-for="Message" class="font-mono">Notes for the design team</label>
+                <textarea asp-for="Message" class="os-textarea" rows="4" placeholder="Timeline, number of units, architect or builder name, any special requirements..."></textarea>
             </div>
 
-            <input type="hidden" asp-for="ProjectType" value="Builder" />
+            <input type="hidden" asp-for="Phone" value="" />
 
-            <div class="os-form-group">
-                <label asp-for="Message" class="font-mono">Project details</label>
-                <textarea asp-for="Message" class="os-textarea" rows="5" placeholder="Tell us about the build — timeline, number of units, special requirements, architect or builder name..."></textarea>
-            </div>
-
-            <button type="submit" class="btn-solid">Send request</button>
+            <button type="submit" class="btn-solid">Send to the design team</button>
+            <p class="ds-submit-note font-mono">No charge &middot; No obligation</p>
         </form>
     </div>
 
     <div class="os-contact-info-col">
         <div class="os-contact-info-card">
-            <h3 class="font-serif">What you get</h3>
+            <h3 class="font-serif">What you get back</h3>
             <ul class="os-design-benefits">
                 <li>Zone-by-zone layout mapped to your floor plan</li>
                 <li>Full equipment schedule with SKUs and quantities</li>
-                <li>Rough-in notes your HVAC crew can follow</li>
-                <li>Delivered within 2 business days</li>
+                <li>Rough-in drawings your HVAC crew can follow</li>
+                <li>Commissioning notes for the installer</li>
+                <li>Delivered within 5 working days</li>
                 <li>Free of charge, no obligation</li>
             </ul>
             <hr class="os-contact-divider" />

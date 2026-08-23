@@ -56,8 +56,17 @@
                             <span class="nav-num">04</span> Get in touch
                         </a>
                     </li>
+                    <li>
+                        <a asp-controller="Contact" asp-action="FindInstaller" data-nav="find-installer">
+                            <span class="nav-num">05</span> Find an installer
+                        </a>
+                    </li>
                 </ul>
             </nav>
+
+            <div class="os-sidebar-tagline">
+                Oxygen enrichment systems for mountain homes &mdash; designed, installed and serviced by certified installers.
+            </div>
 
             <div id="os-o2-widget" class="os-o2-widget">
                 <div class="o2-label">Live network</div>
@@ -78,7 +87,7 @@
                 <button class="btn-quote-list" id="open-quote-panel">
                     Quote list <span class="quote-badge" id="quote-badge">0</span>
                 </button>
-                <a asp-controller="Contact" asp-action="Index" class="btn-solid">Request a quote</a>
+                <a asp-controller="Contact" asp-action="Quote" class="btn-solid">Request a quote</a>
                 <a href="#" class="btn-ghost btn-dealer-login">Dealer login</a>
             </div>
         </aside>
@@ -102,9 +111,10 @@
                     <li><a asp-controller="Home" asp-action="TheSystem"><span class="nav-num">02</span> The system</a></li>
                     <li><a asp-controller="Catalog" asp-action="Index"><span class="nav-num">03</span> Equipment</a></li>
                     <li><a asp-controller="Contact" asp-action="Index"><span class="nav-num">04</span> Get in touch</a></li>
+                    <li><a asp-controller="Contact" asp-action="FindInstaller"><span class="nav-num">05</span> Find an installer</a></li>
                 </ul>
                 <div class="mobile-nav-cta">
-                    <a asp-controller="Contact" asp-action="Index" class="btn-solid">Request a quote</a>
+                    <a asp-controller="Contact" asp-action="Quote" class="btn-solid">Request a quote</a>
                 </div>
             </nav>
         </header>

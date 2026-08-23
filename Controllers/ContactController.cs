@@ -23,6 +23,21 @@ public class ContactController : Controller
         return View();
     }
 
+    public IActionResult Quote() => View(new QuotePageRequest());
+
+    [HttpPost]
+    public IActionResult Quote(QuotePageRequest model)
+    {
+        if (!ModelState.IsValid) return View(model);
+        Console.WriteLine($"[Quote] {model.Name} <{model.Email}> — {model.Rooms} rooms @ {model.Elevation}");
+        TempData["QuoteSuccess"] = "true";
+        TempData["QuoteName"] = model.Name;
+        TempData["QuoteEmail"] = model.Email;
+        TempData["QuoteRooms"] = model.Rooms.ToString();
+        TempData["QuoteElevation"] = model.Elevation;
+        return RedirectToAction(nameof(Quote));
+    }
+
     public IActionResult DesignService() => View(new QuoteRequest { ProjectType = "Builder" });
 
     [HttpPost]

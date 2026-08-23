@@ -32,6 +32,16 @@ app.MapControllerRoute(
     defaults: new { controller = "Home", action = "TheSystem" });
 
 app.MapControllerRoute(
+    name: "quote",
+    pattern: "quote",
+    defaults: new { controller = "Contact", action = "Quote" });
+
+app.MapControllerRoute(
+    name: "find-installer",
+    pattern: "find-installer",
+    defaults: new { controller = "Contact", action = "FindInstaller" });
+
+app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}")
     .WithStaticAssets();

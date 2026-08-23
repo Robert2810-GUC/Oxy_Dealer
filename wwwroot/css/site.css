@@ -1484,3 +1484,329 @@ body { overflow-x: hidden; max-width: 100vw; }
   border-bottom: 1px solid var(--border-c);
   margin-bottom: 20px;
 }
+
+
+/* ================================================================
+   Sidebar tagline
+   ================================================================ */
+.os-sidebar-tagline {
+  padding: 16px 22px;
+  font-size: 12px;
+  line-height: 1.65;
+  color: var(--muted-1);
+  border-top: 1px solid var(--border-d);
+  border-bottom: 1px solid var(--border-d);
+}
+
+/* ================================================================
+   Request a Quote page
+   ================================================================ */
+.rq-layout {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  align-items: start;
+  background: var(--cream);
+  min-height: 60vh;
+}
+
+.rq-form-col {
+  padding: clamp(32px,4cqw,52px) clamp(28px,4cqw,48px);
+  border-right: 1px solid var(--border-c);
+}
+
+.rq-summary-col {
+  padding: clamp(32px,4cqw,52px) clamp(20px,3cqw,32px);
+  position: sticky;
+  top: 0;
+}
+
+/* Step indicators */
+.rq-steps {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 32px;
+}
+.rq-step {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  opacity: .4;
+  transition: opacity 200ms;
+}
+.rq-step.active { opacity: 1; }
+.rq-step-num { font-size: 9px; letter-spacing: .18em; color: var(--gold); }
+.rq-step-label { font-size: 13px; color: var(--navy); }
+.rq-step-divider { flex: 1; height: 1px; background: var(--border-c); max-width: 40px; }
+
+.rq-step-heading {
+  font-size: clamp(20px,2.5cqw,30px);
+  font-weight: 400;
+  color: var(--navy);
+  margin-bottom: 28px;
+}
+
+/* Rooms slider */
+.rq-rooms-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+.rq-rooms-min, .rq-rooms-max { font-size: 10px; letter-spacing: .1em; color: var(--muted-2); flex-shrink: 0; }
+.rq-slider {
+  flex: 1;
+  -webkit-appearance: none;
+  height: 3px;
+  background: var(--border-c);
+  border-radius: 2px;
+  outline: none;
+  cursor: pointer;
+}
+.rq-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  background: var(--navy);
+  cursor: pointer;
+  border: 3px solid var(--cream);
+  box-shadow: 0 0 0 1px var(--navy);
+}
+.rq-slider::-moz-range-thumb {
+  width: 16px; height: 16px;
+  border-radius: 50%;
+  background: var(--navy);
+  cursor: pointer;
+  border: 3px solid var(--cream);
+}
+
+.rq-rooms-pills {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.rq-pill {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: .08em;
+  padding: 5px 10px;
+  border: 1px solid var(--border-c);
+  background: #fff;
+  color: var(--muted-5);
+  cursor: pointer;
+  transition: all 150ms;
+  border-radius: 2px;
+}
+.rq-pill.active, .rq-pill:hover {
+  border-color: var(--navy);
+  background: var(--navy);
+  color: var(--cream);
+}
+
+/* Option group (radio buttons styled as tiles) */
+.rq-option-group {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.rq-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border: 1px solid var(--border-c);
+  background: #fff;
+  font-size: 14px;
+  color: var(--navy);
+  cursor: pointer;
+  transition: all 150ms;
+  user-select: none;
+}
+.rq-option.active, .rq-option:hover {
+  border-color: var(--navy);
+  background: var(--navy);
+  color: var(--cream);
+}
+.rq-radio { display: none; }
+
+/* Back button */
+.rq-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 10px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--muted-2);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin-bottom: 24px;
+  transition: color 150ms;
+}
+.rq-back:hover { color: var(--navy); }
+
+.rq-next { margin-top: 8px; }
+.rq-reply-note {
+  font-size: 9.5px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--muted-2);
+  margin-top: 12px;
+}
+
+/* Summary sidebar */
+.rq-summary {
+  background: var(--cream-2);
+  border: 1px solid var(--border-c);
+  padding: 20px 20px 24px;
+}
+.rq-summary-label {
+  font-size: 9px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 16px;
+}
+.rq-summary-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border-c);
+  font-size: 13px;
+}
+.rq-summary-row .font-mono { font-size: 9.5px; letter-spacing: .1em; color: var(--muted-2); }
+.rq-summary-note {
+  font-size: 11px;
+  line-height: 1.65;
+  color: var(--muted-2);
+  margin-top: 14px;
+}
+
+/* Success banner */
+.rq-success-banner {
+  background: var(--cream);
+  padding: clamp(40px,5cqw,72px) clamp(28px,4cqw,56px);
+}
+.rq-success-inner {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+  margin-bottom: 28px;
+  max-width: 56ch;
+}
+.rq-success-icon { flex-shrink: 0; padding-top: 4px; }
+.rq-success-inner h2 { font-size: 28px; font-weight: 400; color: var(--navy); margin-bottom: 10px; }
+.rq-success-inner p { font-size: 15px; line-height: 1.75; color: var(--muted-5); }
+.rq-success-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+
+/* ================================================================
+   Design Service page
+   ================================================================ */
+.ds-section {
+  background: var(--cream);
+  padding: clamp(40px,5cqw,64px) clamp(28px,4cqw,56px);
+  border-bottom: 1px solid var(--border-c);
+}
+.ds-section-label {
+  font-size: 9px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 12px;
+}
+.ds-section-heading {
+  font-size: clamp(22px,2.8cqw,34px);
+  font-weight: 400;
+  color: var(--navy);
+  margin-bottom: 32px;
+  line-height: 1.15;
+}
+
+/* Deliverables grid */
+.ds-deliverables {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+.ds-deliverable {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  padding: 20px;
+  background: var(--cream-2);
+  border: 1px solid var(--border-c);
+}
+.ds-deliverable-icon {
+  font-size: 8px;
+  color: var(--teal);
+  flex-shrink: 0;
+  padding-top: 5px;
+}
+.ds-deliverable h3 { font-size: 15px; font-weight: 600; color: var(--navy); margin-bottom: 6px; }
+.ds-deliverable p  { font-size: 13px; line-height: 1.65; color: var(--muted-5); }
+
+/* How it runs steps */
+.ds-section.ds-how { background: var(--navy); }
+.ds-section.ds-how .ds-section-label { color: var(--gold-2); }
+.ds-section.ds-how .ds-section-heading { color: var(--cream); }
+.ds-steps {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+.ds-step {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+.ds-step-num {
+  font-size: 9px;
+  letter-spacing: .2em;
+  color: var(--teal);
+  flex-shrink: 0;
+  padding-top: 4px;
+}
+.ds-step h3 { font-size: 15px; font-weight: 600; color: var(--cream); margin-bottom: 6px; }
+.ds-step p  { font-size: 13px; line-height: 1.65; color: var(--muted-3); }
+.ds-note {
+  font-size: 10px;
+  letter-spacing: .12em;
+  color: var(--muted-2);
+}
+.ds-form-label {
+  font-size: 9px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 20px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--border-c);
+}
+.ds-submit-note {
+  font-size: 9.5px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--muted-2);
+  margin-top: 10px;
+}
+
+/* ── Responsive ───────────────────────────────────────────────── */
+@media (max-width: 960px) {
+  .rq-layout { grid-template-columns: 1fr; }
+  .rq-form-col { border-right: none; border-bottom: 1px solid var(--border-c); }
+  .rq-summary-col { position: static; }
+  .ds-deliverables, .ds-steps { grid-template-columns: 1fr; }
+}
+@media (max-width: 768px) {
+  .rq-option-group { flex-direction: column; }
+  .rq-option { width: 100%; }
+  .rq-success-inner { flex-direction: column; gap: 12px; }
+  .rq-success-actions { flex-direction: column; }
+  .rq-success-actions .btn-outline-dark,
+  .rq-success-actions .btn-ghost { width: 100%; text-align: center; }
+}

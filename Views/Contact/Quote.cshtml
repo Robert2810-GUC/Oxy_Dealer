@@ -1,0 +1,270 @@
+@model OxygenSolutions.Models.QuotePageRequest
+@{
+    ViewData["Title"] = "Request a Quote";
+    var success = TempData["QuoteSuccess"] as string == "true";
+}
+
+<div class="os-page-header">
+    <div class="os-section-eyebrow">Get in touch</div>
+    <h1 class="font-serif">Request a Quote</h1>
+    <p class="os-page-subhead">No payment online &middot; Priced as a schedule &middot; Installed by certified crew</p>
+</div>
+
+@if (success)
+{
+    <div class="rq-success-banner">
+        <div class="rq-success-inner">
+            <div class="rq-success-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="36" height="36">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+            </div>
+            <div>
+                <h2 class="font-serif">Request received.</h2>
+                <p>We&rsquo;ll come back within one business day. A specialist reviews your elevation and room count, prices the schedule, then introduces the certified installer covering your area.</p>
+            </div>
+        </div>
+        <div class="rq-success-actions">
+            <a asp-controller="Catalog" asp-action="Index" class="btn-outline-dark">Browse equipment</a>
+            <a asp-controller="Contact" asp-action="Quote" class="btn-ghost">New request</a>
+        </div>
+    </div>
+}
+else
+{
+    <div class="rq-layout">
+
+        <div class="rq-form-col">
+
+            <!-- Step indicators -->
+            <div class="rq-steps">
+                <div class="rq-step active" id="step-ind-1">
+                    <span class="rq-step-num font-mono">01</span>
+                    <span class="rq-step-label">The house</span>
+                </div>
+                <div class="rq-step-divider"></div>
+                <div class="rq-step" id="step-ind-2">
+                    <span class="rq-step-num font-mono">02</span>
+                    <span class="rq-step-label">Your details</span>
+                </div>
+            </div>
+
+            <form asp-action="Quote" method="post" id="rq-form" class="os-form">
+                <div asp-validation-summary="ModelOnly" class="os-validation-summary"></div>
+
+                <!-- Step 1: The house -->
+                <div class="rq-step-panel" id="rq-step-1">
+                    <h2 class="rq-step-heading font-serif">01 &mdash; The house</h2>
+
+                    <div class="os-form-group">
+                        <label asp-for="Elevation" class="font-mono">Site elevation</label>
+                        <input asp-for="Elevation" class="os-input" placeholder="e.g. 7,500 ft" />
+                    </div>
+
+                    <div class="os-form-group">
+                        <label class="font-mono">Rooms to enrich &mdash; <span id="rooms-display">@Model.Rooms</span></label>
+                        <div class="rq-rooms-row">
+                            <span class="font-mono rq-rooms-min">1</span>
+                            <input asp-for="Rooms" type="range" min="1" max="12" class="rq-slider" id="rooms-slider" />
+                            <span class="font-mono rq-rooms-max">12+</span>
+                        </div>
+                        <div class="rq-rooms-pills" id="rooms-pills">
+                            @for (int i = 1; i <= 12; i++)
+                            {
+                                <button type="button" class="rq-pill @(i == Model.Rooms ? "active" : "")" data-rooms="@i">@i</button>
+                            }
+                        </div>
+                    </div>
+
+                    <div class="os-form-group">
+                        <label asp-for="Stage" class="font-mono">Stage of work</label>
+                        <div class="rq-option-group">
+                            @foreach (var stage in new[] { "New build", "Remodel", "Existing home" })
+                            {
+                                <label class="rq-option @(Model.Stage == stage ? "active" : "")">
+                                    <input type="radio" asp-for="Stage" value="@stage" class="rq-radio" />
+                                    @stage
+                                </label>
+                            }
+                        </div>
+                    </div>
+
+                    <div class="os-form-group">
+                        <label asp-for="Role" class="font-mono">Who are you?</label>
+                        <div class="rq-option-group">
+                            @foreach (var role in new[] { "Homeowner", "Builder", "Architect" })
+                            {
+                                <label class="rq-option @(Model.Role == role ? "active" : "")">
+                                    <input type="radio" asp-for="Role" value="@role" class="rq-radio" />
+                                    @role
+                                </label>
+                            }
+                        </div>
+                    </div>
+
+                    <button type="button" class="btn-solid rq-next" id="rq-next">Continue to your details</button>
+                </div>
+
+                <!-- Step 2: Your details -->
+                <div class="rq-step-panel" id="rq-step-2" style="display:none">
+                    <h2 class="rq-step-heading font-serif">02 &mdash; Your details</h2>
+
+                    <button type="button" class="rq-back font-mono" id="rq-back">&#8592; Edit the house</button>
+
+                    <div class="os-form-group">
+                        <label asp-for="Name" class="font-mono">Name <span class="required">*</span></label>
+                        <input asp-for="Name" class="os-input" placeholder="Jane Smith" />
+                        <span asp-validation-for="Name" class="os-field-error"></span>
+                    </div>
+
+                    <div class="os-form-row">
+                        <div class="os-form-group">
+                            <label asp-for="Email" class="font-mono">Email <span class="required">*</span></label>
+                            <input asp-for="Email" class="os-input" placeholder="you@example.com" />
+                            <span asp-validation-for="Email" class="os-field-error"></span>
+                        </div>
+                        <div class="os-form-group">
+                            <label asp-for="Phone" class="font-mono">Phone</label>
+                            <input asp-for="Phone" class="os-input" placeholder="(406) 555-0100" />
+                        </div>
+                    </div>
+
+                    <div class="os-form-group">
+                        <label asp-for="Town" class="font-mono">Town or ZIP</label>
+                        <input asp-for="Town" class="os-input" placeholder="Bozeman, MT or 59715" />
+                    </div>
+
+                    <div class="os-form-group">
+                        <label asp-for="Notes" class="font-mono">Anything else</label>
+                        <textarea asp-for="Notes" class="os-textarea" rows="4" placeholder="Timeline, architect contact, special requirements..."></textarea>
+                    </div>
+
+                    <button type="submit" class="btn-solid">Send request</button>
+                    <p class="rq-reply-note font-mono">Reply within one business day</p>
+                </div>
+
+            </form>
+        </div>
+
+        <div class="rq-summary-col">
+            <div class="rq-summary">
+                <div class="rq-summary-label font-mono">Your request so far</div>
+
+                <div class="rq-summary-row">
+                    <span class="font-mono">Elevation</span>
+                    <span id="sum-elevation">&mdash;</span>
+                </div>
+                <div class="rq-summary-row">
+                    <span class="font-mono">Rooms</span>
+                    <span id="sum-rooms">1</span>
+                </div>
+                <div class="rq-summary-row">
+                    <span class="font-mono">Stage</span>
+                    <span id="sum-stage">New build</span>
+                </div>
+                <div class="rq-summary-row">
+                    <span class="font-mono">Role</span>
+                    <span id="sum-role">Homeowner</span>
+                </div>
+
+                <hr class="os-contact-divider" />
+
+                <div class="rq-summary-note">
+                    No payment online &middot; Priced as a schedule &middot; Installed by certified crew
+                </div>
+            </div>
+        </div>
+
+    </div>
+}
+
+@section Scripts {
+<script>
+(function () {
+  var step1 = document.getElementById('rq-step-1');
+  var step2 = document.getElementById('rq-step-2');
+  var nextBtn = document.getElementById('rq-next');
+  var backBtn = document.getElementById('rq-back');
+  var ind1 = document.getElementById('step-ind-1');
+  var ind2 = document.getElementById('step-ind-2');
+
+  // Summary elements
+  var sumElev  = document.getElementById('sum-elevation');
+  var sumRooms = document.getElementById('sum-rooms');
+  var sumStage = document.getElementById('sum-stage');
+  var sumRole  = document.getElementById('sum-role');
+
+  // Rooms slider + pills
+  var slider = document.getElementById('rooms-slider');
+  var display = document.getElementById('rooms-display');
+  var pills = document.querySelectorAll('.rq-pill');
+
+  function setRooms(val) {
+    if (slider) slider.value = val;
+    if (display) display.textContent = val;
+    if (sumRooms) sumRooms.textContent = val;
+    pills.forEach(function (p) {
+      p.classList.toggle('active', p.dataset.rooms == val);
+    });
+  }
+
+  if (slider) {
+    slider.addEventListener('input', function () { setRooms(this.value); });
+  }
+  pills.forEach(function (p) {
+    p.addEventListener('click', function () { setRooms(this.dataset.rooms); });
+  });
+
+  // Radio options — active class
+  document.querySelectorAll('.rq-radio').forEach(function (r) {
+    r.addEventListener('change', function () {
+      var group = this.closest('.rq-option-group');
+      if (!group) return;
+      group.querySelectorAll('.rq-option').forEach(function (o) { o.classList.remove('active'); });
+      this.closest('.rq-option').classList.add('active');
+
+      var name = this.name;
+      if (name === 'Stage' && sumStage) sumStage.textContent = this.value;
+      if (name === 'Role'  && sumRole)  sumRole.textContent  = this.value;
+    });
+  });
+
+  // Elevation → summary
+  var elevInput = document.querySelector('input[name="Elevation"]');
+  if (elevInput) {
+    elevInput.addEventListener('input', function () {
+      if (sumElev) sumElev.textContent = this.value || '—';
+    });
+  }
+
+  // Step navigation
+  if (nextBtn) {
+    nextBtn.addEventListener('click', function () {
+      step1.style.display = 'none';
+      step2.style.display = '';
+      if (ind1) ind1.classList.remove('active');
+      if (ind2) ind2.classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+  if (backBtn) {
+    backBtn.addEventListener('click', function () {
+      step2.style.display = 'none';
+      step1.style.display = '';
+      if (ind2) ind2.classList.remove('active');
+      if (ind1) ind1.classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+
+  // If server returned validation errors, show step 2
+  var hasErrors = document.querySelector('.field-validation-error, .os-validation-summary li');
+  if (hasErrors && step1 && step2) {
+    step1.style.display = 'none';
+    step2.style.display = '';
+    if (ind1) ind1.classList.remove('active');
+    if (ind2) ind2.classList.add('active');
+  }
+})();
+</script>
+}
