@@ -113,12 +113,14 @@
   }
 
   /* ── Quote Panel ───────────────────────────────────────────── */
-  var quotePanel   = document.querySelector('.quote-panel');
-  var quoteOverlay = document.querySelector('.quote-panel-overlay');
-  var openQuoteBtn = document.getElementById('open-quote');
-  var closeQuoteBtn = document.getElementById('close-quote');
-  var quoteBadge   = document.getElementById('quote-badge');
-  var quotePanelBody = document.querySelector('.quote-panel-body');
+  var quotePanel      = document.querySelector('.quote-panel');
+  var openQuoteBtn    = document.getElementById('open-quote-panel');
+  var openQuoteMobile = document.getElementById('open-quote-panel-mobile');
+  var closeQuoteBtn   = document.getElementById('close-quote');
+  var closeBackdrop   = document.getElementById('close-quote-backdrop');
+  var quoteBadge      = document.getElementById('quote-badge');
+  var quoteBadgeMob   = document.getElementById('quote-badge-mobile');
+  var quotePanelBody  = document.querySelector('.quote-panel-body');
 
   // Quote list state: { productId: { name, sku, image, qty } }
   var quoteItems = {};
@@ -126,30 +128,19 @@
   function openQuotePanel() {
     if (!quotePanel) return;
     quotePanel.classList.add('open');
-    if (quoteOverlay) quoteOverlay.classList.add('open');
     document.body.style.overflow = 'hidden';
   }
 
   function closeQuotePanel() {
     if (!quotePanel) return;
     quotePanel.classList.remove('open');
-    if (quoteOverlay) quoteOverlay.classList.remove('open');
     document.body.style.overflow = '';
   }
 
-  if (openQuoteBtn) {
-    openQuoteBtn.addEventListener('click', openQuotePanel);
-  }
-
-  if (closeQuoteBtn) {
-    closeQuoteBtn.addEventListener('click', closeQuotePanel);
-  }
-
-  if (quoteOverlay) {
-    quoteOverlay.addEventListener('click', function (e) {
-      if (e.target === quoteOverlay) closeQuotePanel();
-    });
-  }
+  if (openQuoteBtn)    openQuoteBtn.addEventListener('click', openQuotePanel);
+  if (openQuoteMobile) openQuoteMobile.addEventListener('click', openQuotePanel);
+  if (closeQuoteBtn)   closeQuoteBtn.addEventListener('click', closeQuotePanel);
+  if (closeBackdrop)   closeBackdrop.addEventListener('click', closeQuotePanel);
 
   // Close on Escape key
   document.addEventListener('keydown', function (e) {
@@ -186,12 +177,14 @@
   });
 
   function updateQuoteBadge() {
-    if (!quoteBadge) return;
     var total = Object.values(quoteItems).reduce(function (sum, item) {
       return sum + item.qty;
     }, 0);
-    quoteBadge.textContent = total;
-    quoteBadge.style.display = total > 0 ? '' : 'none';
+    [quoteBadge, quoteBadgeMob].forEach(function (el) {
+      if (!el) return;
+      el.textContent = total;
+      el.style.display = total > 0 ? '' : 'none';
+    });
   }
 
   function renderQuotePanel() {

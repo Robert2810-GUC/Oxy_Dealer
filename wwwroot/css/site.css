@@ -190,8 +190,8 @@ ul, ol { list-style: none; }
 .btn-ghost { font-family: var(--mono); font-size: 9px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted-2); padding: 8px 0; text-align: center; }
 .btn-ghost:hover { color: var(--cream); }
 
-.btn-dealer-login { display: block; text-align: center; font-family: var(--mono); font-size: 9px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted-2); padding: 6px 0; }
-.btn-dealer-login:hover { color: var(--muted-3); }
+.btn-dealer-login { display: block; text-align: center; font-family: var(--mono); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: #fff; padding: 8px 0; font-weight: 500; }
+.btn-dealer-login:hover { color: var(--teal-light); }
 
 /* ── Main ─────────────────────────────────────────────────── */
 .os-main { flex: 1; background: var(--cream); min-width: 0; display: flex; flex-direction: column; }
@@ -222,7 +222,7 @@ ul, ol { list-style: none; }
 /* ── Ticker ───────────────────────────────────────────────── */
 @keyframes os-ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 .os-ticker { background: var(--navy); overflow: hidden; padding: 13px 0; border-bottom: 1px solid var(--border-d); }
-.os-ticker-inner { display: flex; white-space: nowrap; animation: os-ticker 38s linear infinite; font-family: var(--mono); font-size: 10.5px; letter-spacing: .22em; text-transform: uppercase; color: var(--muted-1); }
+.os-ticker-inner { display: flex; white-space: nowrap; animation: os-ticker 38s linear infinite; font-family: var(--mono); font-size: 10.5px; letter-spacing: .22em; text-transform: uppercase; color: #fff; }
 .os-ticker-inner span { padding-right: 38px; }
 .os-ticker-inner .teal { color: var(--teal-light); }
 
