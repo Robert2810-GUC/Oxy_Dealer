@@ -67,9 +67,78 @@
         }
 
         <div class="os-product-actions">
-            <button class="btn-solid btn-add-quote" data-add-quote="@Model.Id" data-name="@Model.Name">Add to quote list</button>
-            <a asp-controller="Contact" asp-action="Index" class="btn-outline">Request a quote</a>
+            <button class="btn-solid btn-add-quote" data-add-quote="@Model.Id" data-name="@Model.Name" data-sku="@Model.Sku" data-image="@Model.ImageFile">Add to quote list</button>
+            <button class="btn-outline" id="open-product-quote">Request a quote</button>
         </div>
+    </div>
+</div>
+
+<!-- Request a Quote Modal -->
+<div class="pq-backdrop" id="pq-backdrop"></div>
+<div class="pq-modal" id="pq-modal" role="dialog" aria-modal="true" aria-labelledby="pq-title">
+    <div class="pq-modal-header">
+        <span class="font-serif" id="pq-title">Request a Quote</span>
+        <button class="pq-close" id="pq-close" aria-label="Close">&times;</button>
+    </div>
+
+    <div class="pq-modal-body" id="pq-body">
+        <div class="pq-product-ref font-mono">@Model.Sku &mdash; @Model.Name</div>
+
+        <form id="pq-form" novalidate>
+            @Html.AntiForgeryToken()
+            <input type="hidden" name="ProductName" value="@Model.Name" />
+            <input type="hidden" name="ProductSku"  value="@Model.Sku" />
+
+            <div class="os-form-row">
+                <div class="os-form-group">
+                    <label class="font-mono">First Name <span class="required">*</span></label>
+                    <input name="FirstName" class="os-input" placeholder="Jane" required />
+                </div>
+                <div class="os-form-group">
+                    <label class="font-mono">Last Name <span class="required">*</span></label>
+                    <input name="LastName" class="os-input" placeholder="Smith" required />
+                </div>
+            </div>
+
+            <div class="os-form-group">
+                <label class="font-mono">Company Name</label>
+                <input name="CompanyName" class="os-input" placeholder="Acme HVAC" />
+            </div>
+
+            <div class="os-form-row">
+                <div class="os-form-group">
+                    <label class="font-mono">Email <span class="required">*</span></label>
+                    <input name="Email" type="email" class="os-input" placeholder="you@example.com" required />
+                </div>
+                <div class="os-form-group">
+                    <label class="font-mono">Phone</label>
+                    <input name="Phone" class="os-input" placeholder="(406) 555-0100" />
+                </div>
+            </div>
+
+            <div class="os-form-group">
+                <label class="font-mono">Quantity</label>
+                <input name="Quantity" type="number" min="1" value="1" class="os-input pq-qty" />
+            </div>
+
+            <div class="os-form-group">
+                <label class="font-mono">Message / Requirements</label>
+                <textarea name="Message" class="os-textarea" rows="4" placeholder="Any special requirements, delivery notes, or questions..."></textarea>
+            </div>
+
+            <div class="pq-form-error" id="pq-error" style="display:none"></div>
+
+            <button type="submit" class="btn-solid pq-submit" id="pq-submit">Submit Request</button>
+        </form>
+    </div>
+
+    <div class="pq-success" id="pq-success" style="display:none">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="40" height="40">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+        </svg>
+        <h3 class="font-serif">Thank you for your inquiry.</h3>
+        <p>Our team will review your request and get back to you shortly.</p>
+        <button class="btn-outline pq-done" id="pq-done">Close</button>
     </div>
 </div>
 

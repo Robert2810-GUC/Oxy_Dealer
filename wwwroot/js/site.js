@@ -267,6 +267,73 @@
     resizeTimer = setTimeout(handleLayout, 120);
   });
 
+  /* ── Product Quote Modal ───────────────────────────────────── */
+  var pqBackdrop = document.getElementById('pq-backdrop');
+  var pqModal    = document.getElementById('pq-modal');
+  var pqOpen     = document.getElementById('open-product-quote');
+  var pqClose    = document.getElementById('pq-close');
+  var pqDone     = document.getElementById('pq-done');
+  var pqForm     = document.getElementById('pq-form');
+  var pqBody     = document.getElementById('pq-body');
+  var pqSuccess  = document.getElementById('pq-success');
+  var pqError    = document.getElementById('pq-error');
+  var pqSubmit   = document.getElementById('pq-submit');
+
+  function openPQ() {
+    if (!pqModal) return;
+    pqModal.classList.add('open');
+    pqBackdrop.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closePQ() {
+    if (!pqModal) return;
+    pqModal.classList.remove('open');
+    pqBackdrop.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  if (pqOpen)    pqOpen.addEventListener('click', openPQ);
+  if (pqClose)   pqClose.addEventListener('click', closePQ);
+  if (pqDone)    pqDone.addEventListener('click', closePQ);
+  if (pqBackdrop) pqBackdrop.addEventListener('click', closePQ);
+
+  if (pqForm) {
+    pqForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      if (pqError) pqError.style.display = 'none';
+      if (pqSubmit) { pqSubmit.disabled = true; pqSubmit.textContent = 'Sending…'; }
+
+      var formData = new FormData(pqForm);
+
+      fetch('/Catalog/ProductQuote', {
+        method: 'POST',
+        body: formData
+      })
+      .then(function (r) { return r.json(); })
+      .then(function (data) {
+        if (data.success) {
+          pqBody.style.display = 'none';
+          if (pqSuccess) pqSuccess.style.display = 'flex';
+        } else {
+          if (pqError) {
+            pqError.textContent = (data.errors || ['Something went wrong.']).join(' ');
+            pqError.style.display = 'block';
+          }
+          if (pqSubmit) { pqSubmit.disabled = false; pqSubmit.textContent = 'Submit Request'; }
+        }
+      })
+      .catch(function () {
+        if (pqError) {
+          pqError.textContent = 'Network error. Please try again.';
+          pqError.style.display = 'block';
+        }
+        if (pqSubmit) { pqSubmit.disabled = false; pqSubmit.textContent = 'Submit Request'; }
+      });
+    });
+  }
+
   /* ── Utility ───────────────────────────────────────────────── */
   function escHtml(str) {
     return String(str)
