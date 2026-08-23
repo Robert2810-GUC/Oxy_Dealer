@@ -108,16 +108,32 @@
   var quotePanelCount = document.getElementById('quote-panel-count');
   var clearQuoteBtn   = document.getElementById('clear-quote');
 
+  var _scrollY = 0;
+
+  function lockScroll() {
+    _scrollY = window.scrollY;
+    document.body.style.position = 'fixed';
+    document.body.style.top      = '-' + _scrollY + 'px';
+    document.body.style.width    = '100%';
+  }
+
+  function unlockScroll() {
+    document.body.style.position = '';
+    document.body.style.top      = '';
+    document.body.style.width    = '';
+    window.scrollTo(0, _scrollY);
+  }
+
   function openQuotePanel() {
     if (!quotePanel) return;
+    lockScroll();
     quotePanel.classList.add('open');
-    document.body.style.overflow = 'hidden';
   }
 
   function closeQuotePanel() {
     if (!quotePanel) return;
     quotePanel.classList.remove('open');
-    document.body.style.overflow = '';
+    unlockScroll();
   }
 
   if (openQuoteBtn)    openQuoteBtn.addEventListener('click', openQuotePanel);
@@ -298,8 +314,8 @@
   var pqError    = document.getElementById('pq-error');
   var pqSubmit   = document.getElementById('pq-submit');
 
-  function openPQ()  { if (!pqModal) return; pqModal.classList.add('open');    pqBackdrop.classList.add('open');    document.body.style.overflow = 'hidden'; }
-  function closePQ() { if (!pqModal) return; pqModal.classList.remove('open'); pqBackdrop.classList.remove('open'); document.body.style.overflow = ''; }
+  function openPQ()  { if (!pqModal) return; lockScroll(); pqModal.classList.add('open');    pqBackdrop.classList.add('open'); }
+  function closePQ() { if (!pqModal) return; pqModal.classList.remove('open'); pqBackdrop.classList.remove('open'); unlockScroll(); }
 
   if (pqOpen)     pqOpen.addEventListener('click', openPQ);
   if (pqClose)    pqClose.addEventListener('click', closePQ);
