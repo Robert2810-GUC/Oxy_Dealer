@@ -47,7 +47,7 @@ else
                     <a asp-action="Detail" asp-route-id="@p.Id" class="product-card-name font-serif">@p.Name</a>
                     <div class="product-card-stock @(p.Stock == "In stock" ? "stock-in" : "stock-order")">@p.Stock</div>
                     <div class="product-card-lead">@p.LeadTime</div>
-                    <button class="btn-add-quote" data-add-quote="@p.Id" data-name="@p.Name">Add to quote</button>
+                    <button class="btn-add-quote" data-add-quote="@p.Id" data-name="@p.Name" data-sku="@p.Sku" data-image="@p.ImageFile">Add to quote</button>
                 </div>
             </div>
         }

@@ -4,6 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] — Oxygen Solutions</title>
+    <link rel="icon" type="image/svg+xml" href="~/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
     <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -16,14 +17,16 @@
         <div class="quote-panel-backdrop" id="close-quote-backdrop"></div>
         <div class="quote-panel-inner">
             <div class="quote-panel-header">
-                <span class="font-serif" style="font-size:23px">Quote list</span>
-                <button id="close-quote">&#x2715;</button>
+                <span class="font-serif">Quote list</span>
+                <button id="close-quote" aria-label="Close">&#x2715;</button>
             </div>
-            <div class="quote-panel-body" id="quote-panel-body">
-                <p class="text-muted" style="padding:40px 0;text-align:center">Nothing here yet.<br>Add equipment and we price the whole list at once.</p>
-            </div>
+            <div class="quote-panel-body" id="quote-panel-body"></div>
             <div class="quote-panel-footer">
-                <a asp-controller="Contact" asp-action="Index" class="btn-solid">Request pricing</a>
+                <div class="qp-footer-top">
+                    <span class="qp-count font-mono" id="quote-panel-count">0 items in your quote</span>
+                    <button id="clear-quote" class="qp-clear font-mono">Clear all</button>
+                </div>
+                <a asp-controller="Contact" asp-action="Quote" class="btn-solid qp-request">Request pricing</a>
             </div>
         </div>
     </div>
